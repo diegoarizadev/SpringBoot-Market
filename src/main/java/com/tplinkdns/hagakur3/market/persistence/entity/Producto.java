@@ -29,6 +29,11 @@ public class Producto {
 
     private Boolean estado;
 
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false) //insertable, updatable - > no se permite hacer crud desde esta clase.
+    private Categoria categoria;
+
     public Integer getIdProducto() {
         return idProducto;
     }
