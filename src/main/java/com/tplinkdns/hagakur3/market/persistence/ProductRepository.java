@@ -2,10 +2,12 @@ package com.tplinkdns.hagakur3.market.persistence;
 
 import com.tplinkdns.hagakur3.market.persistence.crud.ProductoCrudRepository;
 import com.tplinkdns.hagakur3.market.persistence.entity.Producto;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository //Como la clase esta interactua con la base de datos..
 public class ProductRepository {
     private ProductoCrudRepository productoCrudRepository;
 
@@ -28,4 +30,17 @@ public class ProductRepository {
     public Optional<List<Producto>> getProductosEscasos(int cantidad){
         return productoCrudRepository.finByIdCantidadStockLessThanAndEstado(cantidad, true);
     }
+
+    public Optional<Producto> getProduct0(int idProduct){
+        return productoCrudRepository.findById(idProduct);
+    }
+
+    public Producto save(Producto producto){
+        return productoCrudRepository.save(producto);
+    }
+
+    public void delete(int idProducto){
+        productoCrudRepository.deleteById(idProducto);
+    }
+
 }

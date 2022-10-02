@@ -19,4 +19,6 @@ public interface ProductoCrudRepository extends CrudRepository<Producto, Integer
 
     @Query(value = "SELECT * FROM productos WHERE id_categoria = ?", nativeQuery = true)
     List<Producto> getIdCategoria(int idCategoria); //Construcción de una consulta SIN QUERY METHOD
+
+
 }
