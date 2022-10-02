@@ -2,6 +2,7 @@ package com.tplinkdns.hagakur3.market.persistence.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity //Mapea una tabla en un modelo de datos de java
 @Table(name = "compras") //Nombre de la tabla.
@@ -26,6 +27,9 @@ public class Compra {
     @ManyToOne
     @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "producto")
+    private List<ComprasProducto> productos; //Acceder a todos los productos de una compra
 
     public Integer getIdCompra() {
         return idCompra;
