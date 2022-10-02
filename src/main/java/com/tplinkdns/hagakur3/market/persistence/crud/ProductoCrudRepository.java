@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public interface ProductoCrudRepository extends CrudRepository<Producto, Integer> { //CrudRepository <Table o clase, Tipo de dato de la PK>
 
-    List<Producto> finByIdCategoria(int idCategoria); // QUERY METHOD, busca todos los productos por IdCategoria
+    List<Producto> findByidCategoria(int idCategoria); // QUERY METHOD, busca todos los productos por IdCategoria
 
 
-    List<Producto> finByIdCategoriaOrderByNombreAsc(int idCategoria); //QUERY METHOD, busca y ordena los productos por id de categoria
+    List<Producto> findByIdCategoriaOrderByNombreAsc(int idCategoria); //QUERY METHOD, busca y ordena los productos por id de categoria
 
-    Optional<List<Producto>> finByIdCantidadStockLessThanAndEstado(int cantidadStock, boolean estado); //QUERY METHOD, recuperar productos escasos y que mas se venden
+    Optional<List<Producto>> findByCantidadStockLessThanAndEstado(int cantidadStock, boolean estado); //QUERY METHOD, recuperar productos escasos y que mas se venden
 
 
     @Query(value = "SELECT * FROM productos WHERE id_categoria = ?", nativeQuery = true)

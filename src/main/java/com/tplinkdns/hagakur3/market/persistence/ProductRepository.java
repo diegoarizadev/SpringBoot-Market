@@ -16,11 +16,11 @@ public class ProductRepository {
     }
 
     public List<Producto> getByCategoria(int idCategoria){
-        return productoCrudRepository.finByIdCategoria(idCategoria);
+        return productoCrudRepository.findByidCategoria(idCategoria);
     }
 
     public List<Producto> getByCategoriaOrderByNombreASC(int idCategoria){
-        return productoCrudRepository.finByIdCategoriaOrderByNombreAsc(idCategoria);
+        return productoCrudRepository.findByIdCategoriaOrderByNombreAsc(idCategoria);
     }
 
     public List<Producto> getByCategoriaNoMethods(int idCategoria){
@@ -28,7 +28,7 @@ public class ProductRepository {
     }
 
     public Optional<List<Producto>> getProductosEscasos(int cantidad){
-        return productoCrudRepository.finByIdCantidadStockLessThanAndEstado(cantidad, true);
+        return productoCrudRepository.findByCantidadStockLessThanAndEstado(cantidad, true);
     }
 
     public Optional<Producto> getProduct0(int idProduct){
