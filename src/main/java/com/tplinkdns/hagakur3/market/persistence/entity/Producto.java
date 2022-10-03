@@ -2,34 +2,38 @@ package com.tplinkdns.hagakur3.market.persistence.entity;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "productos") //HAce referencia al nombre de la tabla en la base de datos.
+@Entity //Mapea una tabla en un modelo de datos de java
+@Table(name = "productos") //Nombre de la tabla.
 public class Producto {
 
+    @Id //Clave primaria.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Llave de la clave primaria.
+    @Column(name = "id_producto") //Nombre de la columna en la base de datos.
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
     private Integer idProducto;
 
     private String nombre;
 
-    @Column(name = "id_categoria")
+    @Column(name = "id_categoria") //Nombre de la columna en la base de datos.
     private Integer idCategoria;
 
-    @Column(name = "codigo_barras")
+    @Column(name = "codigo_barras") //Nombre de la columna en la base de datos.
     private String codigoBarras;
 
-    @Column(name = "precio_venta")
-    private Double precioVenta;
 
-    @Column(name = "cantidad_stock")
+    @Column(name = "precio_venta") //Nombre de la columna en la base de datos.
+    private double precioVenta;
+
+
+    @Column(name = "cantidad_stock") //Nombre de la columna en la base de datos.
+
     private Integer cantidadStock;
 
     private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_categoria", insertable = false, updatable = false)
+    @JoinColumn(name = "id_categoria", insertable = false, updatable = false) //insertable, updatable - > no se permite hacer crud desde esta clase.
+
     private Categoria categoria;
 
     public Integer getIdProducto() {
@@ -64,11 +68,11 @@ public class Producto {
         this.codigoBarras = codigoBarras;
     }
 
-    public Double getPrecioVenta() {
+    public double getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(Double precioVenta) {
+    public void setPrecioVenta(double precioVenta) {
         this.precioVenta = precioVenta;
     }
 
@@ -87,7 +91,6 @@ public class Producto {
     public void setEstado(Boolean estado) {
         this.estado = estado;
     }
-
     public Categoria getCategoria() {
         return categoria;
     }
