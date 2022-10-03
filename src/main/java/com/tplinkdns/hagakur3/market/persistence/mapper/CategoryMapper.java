@@ -22,6 +22,4 @@ public interface CategoryMapper {
     @InheritInverseConfiguration
     @Mapping(target = "productos", ignore = true) //Se ignoran los productos del objeto de la clase categoria.
     Categoria toCategoria(Category category);//hace una conversion de Category a Categoria.
-
-
 }

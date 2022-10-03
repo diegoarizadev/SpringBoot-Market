@@ -1,17 +1,21 @@
 package com.tplinkdns.hagakur3.market.persistence;
 
 import com.tplinkdns.hagakur3.market.domain.Product;
+import com.tplinkdns.hagakur3.market.domain.repository.ProductRepositoryDTO;
 import com.tplinkdns.hagakur3.market.persistence.crud.ProductoCrudRepository;
 import com.tplinkdns.hagakur3.market.persistence.entity.Producto;
 import com.tplinkdns.hagakur3.market.persistence.mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository //Como la clase esta interactua con la base de datos..
-public class ProductRepository implements com.tplinkdns.hagakur3.market.domain.repository.ProductRepository {
+public class ProductRepository implements ProductRepositoryDTO {
+    @Autowired //Spring se encargara de crear esas instancias.
     private ProductoCrudRepository productoCrudRepository;
+    @Autowired
     private ProductMapper productMapper;
 
     @Override
