@@ -9,7 +9,6 @@ public class Producto {
     @Id //Clave primaria.
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Llave de la clave primaria.
     @Column(name = "id_producto") //Nombre de la columna en la base de datos.
-
     private Integer idProducto;
 
     private String nombre;
@@ -20,20 +19,16 @@ public class Producto {
     @Column(name = "codigo_barras") //Nombre de la columna en la base de datos.
     private String codigoBarras;
 
-
     @Column(name = "precio_venta") //Nombre de la columna en la base de datos.
     private double precioVenta;
 
-
     @Column(name = "cantidad_stock") //Nombre de la columna en la base de datos.
-
     private Integer cantidadStock;
 
     private Boolean estado;
 
     @ManyToOne
     @JoinColumn(name = "id_categoria", insertable = false, updatable = false) //insertable, updatable - > no se permite hacer crud desde esta clase.
-
     private Categoria categoria;
 
     public Integer getIdProducto() {
