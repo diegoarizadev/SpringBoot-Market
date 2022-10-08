@@ -1,6 +1,7 @@
 package com.tplinkdns.hagakur3.market.web.security;
 
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,5 +25,23 @@ public class JWTUtil {
                 .compact();
     }
 
+
+    //Valida el Token de las peticiones.
+    public boolean validateToken(String token, UserDetails userDetails) {
+        return userDetails.getUsername().equals(extractUsername(token)) && !isTokenExpired(token);
+    }
+
+    public String extractUsername(String token) {
+        return getClaims(token).getSubject(); //Usuario de la petici´´n
+    }
+
+    //Validación de la expiración del token
+    public boolean isTokenExpired(String token) {
+        return getClaims(token).getExpiration().before(new Date());
+    }
+
+    private Claims getClaims(String token) {//Valida la petición y retorna cada uno de los valores del body
+        return Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
+    }
 
 }
