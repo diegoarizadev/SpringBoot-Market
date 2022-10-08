@@ -7,6 +7,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.spec.SecretKeySpec;
+import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
 import static io.jsonwebtoken.security.Keys.secretKeyFor;
@@ -14,14 +17,19 @@ import static io.jsonwebtoken.security.Keys.secretKeyFor;
 @Component
 public class JWTUtil {
 
-    private static final String KEY = "n0rf3n";
+    private static final String KEY = "asdfSFS34wfsdfsdfSDSD32dfsddDDerQSNCK34SOWEK5354fdgdf4";
+
+    private Key key = secretKeyFor(SignatureAlgorithm.HS256);
     public String generateToken(UserDetails userDetails){
+
+        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(KEY),
+                SignatureAlgorithm.HS256.getJcaName());
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10 ))
-                .signWith(SignatureAlgorithm.HS256, secretKeyFor(SignatureAlgorithm.HS256))
+                .signWith(hmacKey)
                 .compact();
     }
 
@@ -41,7 +49,13 @@ public class JWTUtil {
     }
 
     private Claims getClaims(String token) {//Valida la petición y retorna cada uno de los valores del body
-        return Jwts.parser().setSigningKey(KEY).parseClaimsJws(token).getBody();
+
+        Key hmacKey = new SecretKeySpec(Base64.getDecoder().decode(KEY),
+                SignatureAlgorithm.HS256.getJcaName());
+        return  Jwts.parserBuilder().setSigningKey(hmacKey).build().parseClaimsJws(token).getBody();
+
+
+
     }
 
 }
